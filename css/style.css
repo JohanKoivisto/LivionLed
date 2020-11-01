@@ -1,0 +1,9 @@
+.container {
+  width: 100%;
+  text-align: center;
+}
+
+#led-display {
+  border: 3px solid black;
+  margin-top: 20px;
+}

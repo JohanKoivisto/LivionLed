@@ -83,7 +83,6 @@ const mapString = str => {
   drawLedDisplay(cty)
 } */
 
-
 // save emojis to database
 const saveEmoji = () => {
   event.preventDefault()
@@ -100,14 +99,15 @@ db.collection('emojis')
   .get()
   .then(snapshot => {
     snapshot.docs.forEach(doc => {
-      savedEmoji.innerHTML += `<canvas id="${doc.id}" width="120" height="120"></canvas>`
-      let miniCanvas = document.getElementById(`${doc.id}`)
-      let cty = miniCanvas.getContext('2d')
+      const newCanvas = document.createElement('canvas')
+      newCanvas.id = doc.id
+      newCanvas.width = 120
+      newCanvas.height = 120
+      savedEmoji.appendChild(newCanvas)
+      let cty = newCanvas.getContext('2d')
       cty.fillStyle = '#2d2d2d'
-      cty.fillRect(0, 0, miniCanvas.width, miniCanvas.height)
-      /* savedEmoji.innerHTML += `<div data-id="${doc.id}"><p>ID is: ${
-        doc.id
-      } and name is ${doc.data().test}</div>` */
+      cty.fillRect(0, 0, newCanvas.width, newCanvas.height)
+
       drawLedDisplay(cty)
     })
   })

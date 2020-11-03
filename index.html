@@ -11,8 +11,41 @@
   <body>
     <div class="container">
       <canvas id="led-display" width="480" height="480"></canvas>
+      <form id="save-emoji">
+        <input type="text" name="emoji" placeholder="emoji name" id="emoji-name">
+        <button onClick="saveEmoji()">Save</button>
+      </form>
     </div>
-    
+    <div id="saved-emoji"></div>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyC-lUEXpAYumOm0qnc6oP96dbzSiXHW3qg",
+    authDomain: "livion-led.firebaseapp.com",
+    databaseURL: "https://livion-led.firebaseio.com",
+    projectId: "livion-led",
+    storageBucket: "livion-led.appspot.com",
+    messagingSenderId: "582374510868",
+    appId: "1:582374510868:web:82a7a625ce179727507201",
+    measurementId: "G-95VXB71PLX"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+  const db = firebase.firestore();
+  db.settings({ timestampsInSnapshots: true });
+</script>
+  
+
     <script src="js/script.js"></script>
   </body>
 </html>

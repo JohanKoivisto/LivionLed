@@ -1,3 +1,7 @@
+body {
+  background-color: rgb(45, 38, 77);
+}
+
 .container {
   width: 100%;
   text-align: center;
@@ -6,4 +10,18 @@
 #led-display {
   border: 3px solid black;
   margin-top: 20px;
+}
+
+#saved-emoji {
+  text-align: center;
+  color:#5fd3ff;
+}
+
+.minicanvas {
+  margin: 10px 5px;
+  display: inline-block
+}
+
+p {
+  margin: 5px
 }

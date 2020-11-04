@@ -5,8 +5,6 @@ const canvas = document.getElementById('led-display')
 const ctx = canvas.getContext('2d')
 ctx.fillStyle = '#2d2d2d'
 ctx.fillRect(0, 0, canvas.width, canvas.height)
-const blockWidth = 59
-const blockHeight = 59
 let savedEmoji = document.getElementById('saved-emoji')
 
 ledArray = [
@@ -22,11 +20,8 @@ ledArray = [
 
 // Define look for led block
 const block = (x, y, width, height, color, contxt = ctx) => {
-  contxt.beginPath()
-  contxt.lineWidth = '1'
   contxt.fillStyle = color
-  contxt.rect(x, y, width, height)
-  contxt.fill()
+  contxt.fillRect(x, y, width, height);
 }
 
 // Get coordinates, map to ledArray, toggle block on/off and call draw function to update DOM
@@ -41,17 +36,17 @@ canvas.addEventListener('click', function (e) {
     ? (ledArray[arrY][arrX] = 1)
     : (ledArray[arrY][arrX] = 0)
 
-  drawLedDisplay(ctx)
+  drawLedDisplay(ctx, 59, 59, 480, 480)
 })
 
-const drawLedDisplay = contxt => {
+const drawLedDisplay = (contxt, blockWidth, blockHeight, canvasHeight, canvasWidth) => {
   for (let i = 0; i < 8; i++) {
     for (let k = 0; k < 8; k++) {
       // draw blocks on/off based on array values
       if (ledArray[k][i] === 0) {
-        block(i * 60, k * 60, blockWidth, blockHeight, 'black', contxt)
+        block(i * (canvasHeight / 8), k * (canvasWidth / 8), blockWidth, blockHeight, 'black', contxt)
       } else {
-        block(i * 60, k * 60, blockWidth, blockHeight, '#5fd3ff', contxt)
+        block(i * (canvasHeight / 8), k * (canvasWidth / 8), blockWidth, blockHeight, '#5fd3ff', contxt)
       }
     }
   }
@@ -107,9 +102,9 @@ db.collection('emojis')
       let cty = newCanvas.getContext('2d')
       cty.fillStyle = '#2d2d2d'
       cty.fillRect(0, 0, newCanvas.width, newCanvas.height)
-
-      drawLedDisplay(cty)
+      
+      drawLedDisplay(cty, 14, 14, 120, 120)
     })
   })
 
-drawLedDisplay()
+  drawLedDisplay(ctx, 59, 59, 480, 480)

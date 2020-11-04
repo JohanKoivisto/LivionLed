@@ -52,41 +52,26 @@ const drawLedDisplay = (contxt, blockWidth, blockHeight, canvasHeight, canvasWid
   }
 }
 
-// firebase doesnt support nested arrays(???) so convert ledArray to string
-const ArrToString = arr => {
-  let arrString = arr.join('')
-  return arrString.replace(/[,]/g, '')
+// firebase doesnt support nested arrays(???) so convert ledArray to JSON
+const arrToJSON = arr => {
+  return JSON.stringify(arr)
 }
 
-// and here we convert string back to ledArray format
-const mapString = str => {
-  strArr = []
-  str = str.split('')
-  for (let i = 0; i < 64; i += 8) {
-    strArr.push(str.slice(i, i + 8))
-  }
-  return strArr
+// convert JSON back to array
+const parseLedArray = str => {
+  return JSON.parse(str)
 }
 
-// render saved emojis to dom
-/* const renderSavedEmoji = () => {
-  const canvas2 = document.getElementById('emoji-test')
-  const cty = canvas2.getContext('2d')
-  cty.fillStyle = '#2d2d2d'
-  cty.fillRect(0, 0, canvas2.width, canvas2.height)
-
-  drawLedDisplay(cty)
-} */
+console.log(arrToJSON(ledArray));
 
 // save emojis to database
 const saveEmoji = () => {
   event.preventDefault()
   let emojiName = document.getElementById('emoji-name').value
-  console.log(emojiName)
-  /* db.collection('emojis').add({
+  db.collection('emojis').add({
     name: emojiName,
-    emojimap: ArrToString(ledArray)
-  }) */
+    emojimap: arrToJSON(ledArray)
+  })
 }
 
 // get data
@@ -102,7 +87,7 @@ db.collection('emojis')
       let cty = newCanvas.getContext('2d')
       cty.fillStyle = '#2d2d2d'
       cty.fillRect(0, 0, newCanvas.width, newCanvas.height)
-      
+      ledArray = parseLedArray(doc.data().emojimap)
       drawLedDisplay(cty, 14, 14, 120, 120)
     })
   })

@@ -13,8 +13,10 @@ body {
 }
 
 #saved-emoji {
+  margin: auto;
   text-align: center;
   color:#5fd3ff;
+  max-width: 800px;
 }
 
 .minicanvas {

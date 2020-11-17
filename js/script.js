@@ -18,7 +18,7 @@ ledArray = [
   [0, 0, 0, 0, 0, 0, 0, 0]
 ]
 
-// Define look for led block
+// Function to generate led block
 const block = (x, y, width, height, color, contxt = ctx) => {
   contxt.fillStyle = color
   contxt.fillRect(x, y, width, height)
